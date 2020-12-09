@@ -8,7 +8,7 @@ import "./SearchFilters.css";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
-export default function SearchFilters() {
+export default function SearchFilters(props) {
   const [values, setValues] = React.useState({
     category: "",
     amount: 10,
@@ -19,18 +19,6 @@ export default function SearchFilters() {
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
-  const getQueryParams = () => {
-    let str = [];
-    if(values.firstName !== '') str.push(`firstName=${values.firstName}`);
-    if(values.lastName !== '') str.push(`lastName=${values.lastName}`);
-    if(values.category !== '') str.push(`limitTo=${[values.category]}`);
-    return str.join('&');
-  }
-  const getJokes = () => {
-    console.log(getQueryParams());
-    fetch(`http://api.icndb.com/jokes/random/${values.amount}?${getQueryParams()}`)
-    .then((res) => res.json()).then((res) => console.log(res))
-  }
   return (
     <Grid container spacing={3}>
       <Grid className="width-100" item md={3}>
@@ -77,7 +65,7 @@ export default function SearchFilters() {
         <Button
           variant="contained"
           color="primary"
-          onClick={() => getJokes()}
+          onClick={() => props.getJokes(values)}
         >
           Fetch
         </Button>

@@ -12,8 +12,8 @@ export default function SearchFilters(props) {
   const [values, setValues] = React.useState({
     category: "",
     amount: 10,
-    firstName: "",
-    lastName: "",
+    firstName: "Chuck",
+    lastName: "Norris",
   });
 
   const handleChange = (prop) => (event) => {
@@ -59,6 +59,7 @@ export default function SearchFilters(props) {
               className="width-100"
               label="Firstname"
               variant="filled"
+              value={values.firstName}
               onChange={handleChange("firstName")}
             />
           </Grid>
@@ -67,6 +68,7 @@ export default function SearchFilters(props) {
               className="width-100"
               label="Lastname"
               variant="filled"
+              value={values.lastName}
               onChange={handleChange("lastName")}
             />
           </Grid>

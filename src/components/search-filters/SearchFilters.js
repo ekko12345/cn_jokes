@@ -1,5 +1,4 @@
 import React from "react";
-import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
@@ -17,7 +16,13 @@ export default function SearchFilters(props) {
   });
 
   const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+    if (prop === "amount") {
+      event.target.value < 1 ?
+      setValues({ ...values, [prop]: 1 }) :
+      setValues({ ...values, [prop]: event.target.value })
+    } else {
+      setValues({ ...values, [prop]: event.target.value });
+    }
   };
   return (
     <Grid container spacing={3}>
@@ -29,8 +34,7 @@ export default function SearchFilters(props) {
             onChange={handleChange("category")}
           >
             <MenuItem value={'nerdy'}>Nerdy</MenuItem>
-            {/* <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem> */}
+            <MenuItem value={'explicit'}>Explicit</MenuItem>
           </Select>
       </Grid>
       <Grid item md={3}>

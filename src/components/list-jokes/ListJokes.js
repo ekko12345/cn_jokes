@@ -12,13 +12,13 @@ export default function ListJokes(props) {
   const jokes = () => {
     if (props.jokes) {
       return props.jokes.map((joke) => (
-        <Card style={cardStyle} key={joke.id}>
+        <Card role="card" style={cardStyle} key={joke.id}>
           <CardContent>{joke.joke}</CardContent>
         </Card>
       ));
     } else {
       return (
-        <Card>
+        <Card role="card">
           <CardContent>No jokes</CardContent>
         </Card>
       );

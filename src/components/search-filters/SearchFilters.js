@@ -47,6 +47,7 @@ export default function SearchFilters(props) {
             shrink: true,
           }}
           onChange={handleChange("amount")}
+          inputProps={{ "data-testid": "fetch-amount" }}
         />
       </Grid>
       <Grid item md={3}>

@@ -3,8 +3,12 @@ import SearchFilters from "./components/search-filters/SearchFilters";
 import ListJokes from "./components/list-jokes/ListJokes";
 import React, { useState } from "react";
 
+let uniqueJokes = [];
+
 function App() {
   const [jokes, setJokes] = useState();
+  const [uniqueJokesCount, setUniqueJokesCount] = useState(uniqueJokes.length);
+  
 
   const getQueryParams = (values) => {
     let str = [];
@@ -22,13 +26,19 @@ function App() {
       .then((res) => res.json())
       .then((res) => {
         setJokes(res.value);
-        console.log(jokes);
+        res.value.forEach((item) => {
+          if (!uniqueJokes.includes(item.id)) {
+            uniqueJokes.push(item.id)
+          }
+        })
+        setUniqueJokesCount(uniqueJokes.length);
       });
   };
   return (
     <div className="App">
+      <h1 style={{textAlign: 'center'}}>CN-JOKES</h1>
       <SearchFilters getJokes={getJokes}></SearchFilters>
-      <ListJokes jokes={jokes}></ListJokes>
+      <ListJokes jokes={jokes} uniqueJokes={uniqueJokesCount}></ListJokes>
     </div>
   );
 }

@@ -3,9 +3,9 @@ import SearchFilters from "./components/search-filters/SearchFilters";
 import ListJokes from "./components/list-jokes/ListJokes";
 import React, { useState } from "react";
 
-let uniqueJokes = [];
-
 function App() {
+  // Not sure if showing session unique jokes meant session storage, decided to play it safe
+  const uniqueJokes = window.sessionStorage.getItem('uniqueJokes') != null ? JSON.parse(window.sessionStorage.getItem('uniqueJokes')) : [];
   const [jokes, setJokes] = useState();
   const [uniqueJokesCount, setUniqueJokesCount] = useState(uniqueJokes.length);
   
@@ -31,6 +31,7 @@ function App() {
             uniqueJokes.push(item.id)
           }
         })
+        window.sessionStorage.setItem('uniqueJokes', JSON.stringify(uniqueJokes));
         setUniqueJokesCount(uniqueJokes.length);
       });
   };

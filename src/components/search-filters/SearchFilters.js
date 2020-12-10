@@ -18,7 +18,7 @@ export default function SearchFilters(props) {
 
   const handleChange = (prop) => (event) => {
     if (prop === "amount") {
-      event.target.value < 1 ?
+      event.target.value < 1 && event.target.value != "" ?
         setValues({ ...values, [prop]: 1 }) :
         setValues({ ...values, [prop]: event.target.value })
     } else {
@@ -64,7 +64,7 @@ export default function SearchFilters(props) {
           <Grid item md={3}>
             <TextField
               className="width-100"
-              label="Firstname"
+              label="Lastname"
               variant="filled"
               onChange={handleChange("lastName")}
             />
